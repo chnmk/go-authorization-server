@@ -12,6 +12,8 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "authorization, content-type")
 
+	//database := db.UseDB("default")
+
 	if r.Method == http.MethodPost {
 		fmt.Println("Got post request")
 
@@ -25,6 +27,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 				// ...
 				fmt.Println(token[0])
 				fmt.Println(token[1])
+				// database.add(username, token[1])
 
 				w.Write([]byte("success"))
 			} else {

@@ -6,7 +6,7 @@ import (
 
 	"github.com/rs/cors"
 
-	handler "github.com/chnmk/sample-authorization-backend/transport/rest"
+	transport "github.com/chnmk/sample-authorization-backend/transport/rest"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 
 	fmt.Println("Server starting...")
 	mux := http.NewServeMux()
-	mux.HandleFunc("/signup", handler.SignupHandler)
+	mux.HandleFunc("/signup", transport.SignupHandler)
 
 	//handlerDefault := cors.Default().Handler(mux)
 	handler := cors.New(
@@ -24,8 +24,7 @@ func main() {
 			AllowedHeaders:     []string{"Bearer", "Bearer ", "authorization", "content-type", "authorization,content-type"},
 			AllowCredentials:   true,
 			OptionsPassthrough: true,
-			// Enable Debugging for testing, consider disabling in production
-			Debug: true,
+			Debug:              true,
 		},
 	).Handler(mux)
 
