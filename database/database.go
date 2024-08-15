@@ -3,8 +3,11 @@ package database
 import "github.com/chnmk/sample-authorization-backend/database/defaultDB"
 
 type DB interface {
-	Add(string, string) error
-	Find(string, string) error
+	// (username, token, group) error
+	Add(string, string, string) error
+
+	// (username, token) (group, error)
+	Find(string, string) (string, error)
 }
 
 func UseDB(db string) DB {
