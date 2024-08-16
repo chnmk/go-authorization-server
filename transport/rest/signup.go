@@ -28,6 +28,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				w.Write([]byte("success"))
+				return
 
 			} else {
 				http.Error(w, "Invalid header", http.StatusBadRequest)

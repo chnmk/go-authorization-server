@@ -42,6 +42,7 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 				}
 
 				w.Write([]byte(signedToken))
+				return
 
 			} else {
 				http.Error(w, "Invalid header", http.StatusBadRequest)
