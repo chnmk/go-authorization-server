@@ -15,6 +15,7 @@ func main() {
 	fmt.Println("Server starting...")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/signup", transport.SignupHandler)
+	mux.HandleFunc("/signin", transport.SigninHandler)
 
 	//handlerDefault := cors.Default().Handler(mux)
 	handler := cors.New(

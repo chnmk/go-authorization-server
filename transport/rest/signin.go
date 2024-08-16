@@ -8,10 +8,11 @@ import (
 	"strings"
 
 	"github.com/chnmk/sample-authorization-backend/database"
+	"github.com/golang-jwt/jwt"
 )
 
-func SignupHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Incoming request to: signup")
+func SigninHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Incoming request to: signin")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "authorization, content-type")
 
@@ -40,13 +41,26 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		if header != "" {
 			token := strings.Split(header, " ")
 			if len(token) == 2 {
-				// Add new user to database
-				err := database.Add(user.Username, token[1], user.Group)
+				// Find user in database
+				group, err := database.Find(user.Username, token[1])
 				if err != nil {
 					http.Error(w, err.Error(), http.StatusBadRequest)
 					return
 				}
-				w.Write([]byte("success"))
+
+				// Return user group and confirmation token
+				secret := []byte("authorization_changeme")
+
+				claims := jwt.MapClaims{"group": group}
+				token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+				signedToken, err := token.SignedString(secret)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+
+				w.Write([]byte(signedToken))
 
 			} else {
 				http.Error(w, "Invalid header", http.StatusBadRequest)
