@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/chnmk/sample-authorization-backend/config"
-	"github.com/chnmk/sample-authorization-backend/database"
 	"github.com/golang-jwt/jwt"
 )
 
@@ -14,8 +13,6 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Incoming request to: signin")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "authorization, content-type")
-
-	database := database.UseDB(config.DBConfig)
 
 	if r.Method == http.MethodPost {
 		fmt.Println("Got post request")
@@ -26,7 +23,7 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 			token := strings.Split(header, " ")
 			if len(token) == 2 {
 				// Find user in database
-				group, err := database.Find(user.Username, token[1])
+				group, err := config.Database.Find(user.Username, token[1])
 				if err != nil {
 					http.Error(w, err.Error(), http.StatusBadRequest)
 					return

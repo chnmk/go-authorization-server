@@ -13,6 +13,7 @@ type DB interface {
 func UseDB(db string) DB {
 	if db == "default" {
 		var new defaultDB.DB
+		new.Users = make(map[string][2]string)
 		return &new
 	} else if db == "sqlite" {
 		return nil

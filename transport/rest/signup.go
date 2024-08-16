@@ -6,15 +6,12 @@ import (
 	"strings"
 
 	"github.com/chnmk/sample-authorization-backend/config"
-	"github.com/chnmk/sample-authorization-backend/database"
 )
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Incoming request to: signup")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "authorization, content-type")
-
-	database := database.UseDB(config.DBConfig)
 
 	if r.Method == http.MethodPost {
 		fmt.Println("Got post request")
@@ -25,7 +22,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			token := strings.Split(header, " ")
 			if len(token) == 2 {
 				// Add new user to database
-				err := database.Add(user.Username, token[1], user.Group)
+				err := config.Database.Add(user.Username, token[1], user.Group)
 				if err != nil {
 					http.Error(w, err.Error(), http.StatusBadRequest)
 					return
