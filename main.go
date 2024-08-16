@@ -17,7 +17,7 @@ func main() {
 	mux.HandleFunc("/signup", transport.SignupHandler)
 	mux.HandleFunc("/signin", transport.SigninHandler)
 
-	//handlerDefault := cors.Default().Handler(mux)
+	// handlerDefault := cors.Default().Handler(mux)
 	handler := cors.New(
 		cors.Options{
 			AllowedMethods:     []string{"POST", "OPTIONS"},

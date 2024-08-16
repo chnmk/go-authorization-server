@@ -1,12 +1,6 @@
 package service
 
-import "fmt"
-
 type User struct {
-	Username     string `json:"username"`
-	PasswordTemp string `json:"password"`
-}
-
-func service() {
-	fmt.Println("Hello, World!")
+	Username string `json:"username"`
+	Group    string `json:"group"`
 }

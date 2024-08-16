@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/chnmk/sample-authorization-backend/config"
 	"github.com/chnmk/sample-authorization-backend/database"
 	"github.com/golang-jwt/jwt"
 )
@@ -14,7 +15,7 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "authorization, content-type")
 
-	database := database.UseDB(DBConfig)
+	database := database.UseDB(config.DBConfig)
 
 	if r.Method == http.MethodPost {
 		fmt.Println("Got post request")
