@@ -10,10 +10,9 @@ import (
 )
 
 func main() {
-	fmt.Println("App starting...")
-
 	fmt.Println("Server starting...")
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("/signup", transport.SignupHandler)
 	mux.HandleFunc("/signin", transport.SigninHandler)
 
@@ -25,7 +24,7 @@ func main() {
 			AllowedHeaders:     []string{"Bearer", "Bearer ", "authorization", "content-type", "authorization,content-type"},
 			AllowCredentials:   true,
 			OptionsPassthrough: true,
-			Debug:              true,
+			Debug:              false,
 		},
 	).Handler(mux)
 

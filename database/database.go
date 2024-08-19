@@ -3,13 +3,18 @@ package database
 import "github.com/chnmk/sample-authorization-backend/database/defaultDB"
 
 type DB interface {
-	// (username, token, group) error
+	// Adds new user to the database. Returns error if user with this name already exists.
+	//
+	// Add(username, token, group) error
 	Add(string, string, string) error
 
-	// (username, token) (group, error)
+	// Returns user permission group. Returns error if user with this name doesn't exist.
+	//
+	// Find(username, token) (group, error)
 	Find(string, string) (string, error)
 }
 
+// Sets current database based on a string value passed from the config package
 func UseDB(db string) DB {
 	if db == "default" {
 		var new defaultDB.DB

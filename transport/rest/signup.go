@@ -10,9 +10,9 @@ import (
 
 // SignupHandler swagger:route POST /signup signupHandler
 //
-// Save user credentials in a database if user with this name doesn't already exist.
+// Save user credentials in a database if a user with this name doesn't already exist.
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Incoming request to: signup")
+	fmt.Printf("\nIncoming request to: /signup\n")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "authorization, content-type")
 
@@ -20,16 +20,19 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Got post request")
 		header, user := readReq(w, r)
 
-		// Read authorization token from request header
+		// Read the authorization token from the request header
 		if header != "" {
 			token := strings.Split(header, " ")
 			if len(token) == 2 {
-				// Add new user to database
+				// Add a new user to the database
 				err := config.Database.Add(user.Username, token[1], user.Group)
 				if err != nil {
+					fmt.Println(err)
 					http.Error(w, err.Error(), http.StatusBadRequest)
 					return
 				}
+
+				fmt.Println("User successfully added to the database")
 				w.Write([]byte("success"))
 				return
 

@@ -2,7 +2,7 @@ package sqlite
 
 import "fmt"
 
+// Placeholder
 func sqlite() {
-	// Placeholder
 	fmt.Println("Hello, World!")
 }

@@ -8,6 +8,7 @@ import (
 	service "github.com/chnmk/sample-authorization-backend/services"
 )
 
+// Reads the request body and the authorization header
 func readReq(w http.ResponseWriter, r *http.Request) (string, service.User) {
 	header := r.Header.Get("Authorization")
 

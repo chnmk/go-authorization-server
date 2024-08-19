@@ -11,9 +11,9 @@ import (
 
 // SigninHandler swagger:route POST /signin signinHandler
 //
-// Check if submitted username and password exist and return user permissions JWT.
+// Check if the submitted username and password exist and return a user permissions JWT.
 func SigninHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Incoming request to: signin")
+	fmt.Printf("\nIncoming request to: /signin\n")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "authorization, content-type")
 
@@ -21,18 +21,19 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Got post request")
 		header, user := readReq(w, r)
 
-		// Read authorization token from request header
+		// Read the authorization token from the request header
 		if header != "" {
 			token := strings.Split(header, " ")
 			if len(token) == 2 {
-				// Find user in database
+				// Find the user in the database
 				group, err := config.Database.Find(user.Username, token[1])
 				if err != nil {
+					fmt.Println(err)
 					http.Error(w, err.Error(), http.StatusBadRequest)
 					return
 				}
 
-				// Return user group and confirmation token
+				// Return user's permission group and a confirmation token
 				secret := []byte("authorization_changeme")
 
 				claims := jwt.MapClaims{"group": group}
@@ -44,6 +45,7 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 
+				fmt.Println("User successfully found in the database")
 				w.Write([]byte(signedToken))
 				return
 

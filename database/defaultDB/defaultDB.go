@@ -4,10 +4,12 @@ import (
 	"errors"
 )
 
+// Implements DB interface from database package
 type DB struct {
 	Users map[string][2]string
 }
 
+// Adds new user to the database. Returns error if user with this name already exists.
 func (db *DB) Add(name string, token string, group string) error {
 	for key := range db.Users {
 		if key == name {
@@ -19,6 +21,7 @@ func (db *DB) Add(name string, token string, group string) error {
 	return nil
 }
 
+// Returns user permission group. Returns error if user with this name doesn't exist.
 func (db DB) Find(name string, token string) (string, error) {
 	var userExists bool
 	var group string
