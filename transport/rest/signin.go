@@ -9,6 +9,9 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
+// SigninHandler swagger:route POST /signin signinHandler
+//
+// Check if submitted username and password exist and return user permissions JWT.
 func SigninHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Incoming request to: signin")
 	w.Header().Set("Access-Control-Allow-Origin", "*")

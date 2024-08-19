@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/signin": {
+      "post": {
+        "summary": "Check if submitted username and password exist and return user permissions JWT.",
+        "operationId": "signinHandler",
+        "parameters": [
+          {
+            "x-go-name": "Username",
+            "description": "Existing username for /signin or new username for /signup",
+            "name": "username",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "x-go-name": "Group",
+            "description": "Permissions group for new user in /signup, not required in /signin",
+            "name": "group",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "x-go-name": "Password",
+            "description": "Bearer token containing password JWT",
+            "name": "password",
+            "in": "header",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/signup": {
+      "post": {
+        "summary": "Save user credentials in a database if user with this name doesn't already exist.",
+        "operationId": "signupHandler",
+        "parameters": [
+          {
+            "x-go-name": "Username",
+            "description": "Existing username for /signin or new username for /signup",
+            "name": "username",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "x-go-name": "Group",
+            "description": "Permissions group for new user in /signup, not required in /signin",
+            "name": "group",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "x-go-name": "Password",
+            "description": "Bearer token containing password JWT",
+            "name": "password",
+            "in": "header",
+            "required": true
+          }
+        ]
+      }
+    }
+  }
+}

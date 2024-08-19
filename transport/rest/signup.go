@@ -8,6 +8,9 @@ import (
 	"github.com/chnmk/sample-authorization-backend/config"
 )
 
+// SignupHandler swagger:route POST /signup signupHandler
+//
+// Save user credentials in a database if user with this name doesn't already exist.
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Incoming request to: signup")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
