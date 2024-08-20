@@ -16,13 +16,11 @@ type DB interface {
 
 // Sets current database based on a string value passed from the config package
 func UseDB(db string) DB {
-	if db == "default" {
+	if db == "sqlite" {
+		panic("Not implemented yet!")
+	} else { // db == "default" and every invalid input
 		var new defaultDB.DB
 		new.Users = make(map[string][2]string)
 		return &new
-	} else if db == "sqlite" {
-		return nil
-	} else {
-		return nil
 	}
 }
