@@ -28,7 +28,7 @@ type userInvalid struct {
 
 func TestReadValidRequest(t *testing.T) {
 	// Request data
-	u := "user1"
+	u := "TestReadValidRequest"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -60,7 +60,7 @@ func TestReadValidRequest(t *testing.T) {
 
 func TestReadValidRequestNoHeader(t *testing.T) {
 	// Request data
-	u := "user1"
+	u := "TestReadValidRequestNoHeader"
 	g := "admin"
 
 	user := userValid{Username: u, Group: g}
@@ -90,12 +90,12 @@ func TestReadValidRequestNoHeader(t *testing.T) {
 
 func TestReadInvalidRequest(t *testing.T) {
 	// Request data
-	u := "user1"
+	u := "TestReadValidRequestNoHeader"
 	g := "admin"
 	pass := "samplejwt"
 
 	user := userInvalid{Invalid_data: u, Group: g}
-	expected := fmt.Sprintf("Header: Bearer %s, body: { %s }", pass, g)
+	expected := fmt.Sprintf("Invalid user data\nHeader: , body: { %s }", g)
 
 	// Encoded data
 	var buf bytes.Buffer
@@ -116,6 +116,6 @@ func TestReadInvalidRequest(t *testing.T) {
 	})
 	handler.ServeHTTP(rec, req)
 
-	assert.Equal(t, http.StatusOK, rec.Code)
+	assert.Equal(t, http.StatusBadRequest, rec.Code)
 	assert.Equal(t, expected, rec.Body.String())
 }

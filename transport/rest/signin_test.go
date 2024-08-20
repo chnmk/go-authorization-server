@@ -15,7 +15,7 @@ import (
 
 func TestSigninValidRequest(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninValidRequest"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -68,7 +68,7 @@ func TestSigninValidRequest(t *testing.T) {
 
 func TestSigninInvalidMethod(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninInvalidMethod"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -114,7 +114,7 @@ func TestSigninInvalidMethod(t *testing.T) {
 
 func TestSigninInvalidUsername(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninInvalidUsername"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -160,7 +160,7 @@ func TestSigninInvalidUsername(t *testing.T) {
 
 func TestSigninInvalidPassword(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninInvalidPassword"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -207,7 +207,7 @@ func TestSigninInvalidPassword(t *testing.T) {
 
 func TestSigninUserDoesntExist(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninUserDoesntExist"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -230,7 +230,7 @@ func TestSigninUserDoesntExist(t *testing.T) {
 	handler.ServeHTTP(rec, req)
 
 	// Sign in data
-	u2 := "user2"
+	u2 := "TestSigninUserDoesntExistFakeUser"
 	user2 := userValid{Username: u2}
 
 	var buf2 bytes.Buffer
@@ -254,7 +254,7 @@ func TestSigninUserDoesntExist(t *testing.T) {
 
 func TestSigninEmptyHeader(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninEmptyHeader"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -299,7 +299,7 @@ func TestSigninEmptyHeader(t *testing.T) {
 
 func TestSigninInvalidHeaderNoBearer(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninInvalidHeaderNoBearer"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -345,7 +345,7 @@ func TestSigninInvalidHeaderNoBearer(t *testing.T) {
 
 func TestSigninInvalidHeaderExtraData(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSigninInvalidHeaderExtraData"
 	g := "admin"
 	pass := "samplejwt"
 

@@ -14,7 +14,7 @@ import (
 
 func TestSignupValidRequest(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSignupValidRequest"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -42,7 +42,7 @@ func TestSignupValidRequest(t *testing.T) {
 
 func TestSignupInvalidMethod(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSignupInvalidMethod"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -69,7 +69,7 @@ func TestSignupInvalidMethod(t *testing.T) {
 
 func TestSignupInvalidBody(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSignupInvalidBody"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -96,7 +96,7 @@ func TestSignupInvalidBody(t *testing.T) {
 
 func TestSignupUserAlreadyExists(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSignupUserAlreadyExists"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -142,9 +142,8 @@ func TestSignupUserAlreadyExists(t *testing.T) {
 
 func TestSignupEmptyHeader(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSignupEmptyHeader"
 	g := "admin"
-	// pass := "samplejwt"
 
 	user := userValid{Username: u, Group: g}
 
@@ -156,7 +155,6 @@ func TestSignupEmptyHeader(t *testing.T) {
 
 	// Creating sign up request
 	req := httptest.NewRequest("POST", "/signup", &buf)
-	// req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", pass))
 
 	// Statring server
 	rec := httptest.NewRecorder()
@@ -170,7 +168,7 @@ func TestSignupEmptyHeader(t *testing.T) {
 
 func TestSignupInvalidHeaderNoBearer(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSignupInvalidHeaderNoBearer"
 	g := "admin"
 	pass := "samplejwt"
 
@@ -198,7 +196,7 @@ func TestSignupInvalidHeaderNoBearer(t *testing.T) {
 
 func TestSignupInvalidHeaderExtraData(t *testing.T) {
 	// Sign up request data
-	u := "user1"
+	u := "TestSignupInvalidHeaderExtraData"
 	g := "admin"
 	pass := "samplejwt"
 
