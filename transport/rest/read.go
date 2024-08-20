@@ -27,5 +27,10 @@ func readReq(w http.ResponseWriter, r *http.Request) (string, service.User) {
 		return "", user
 	}
 
+	if user.Username == "" {
+		http.Error(w, "Invalid user data", http.StatusBadRequest)
+		return "", user
+	}
+
 	return header, user
 }
